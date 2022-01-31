@@ -4,10 +4,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom"
 import { Homepage } from './components/homepage/Homepage.js';
+import { Derapy } from './components/Derapy.js'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+      <Derapy />
       <Homepage />
     </BrowserRouter>
   </React.StrictMode>,
