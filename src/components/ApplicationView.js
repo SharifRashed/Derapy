@@ -2,21 +2,21 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { Homepage } from "./homepage/Homepage.js"
 import { SuggestionForm } from "./suggestion/suggestionForm.js"
-import { Suggestion } from "./suggestion/suggestion.js"
+import { SuggestionList } from "./suggestion/suggestionList.js"
 
 
 export const ApplicationViews = () => {
     return (
         <>
-            <Route path="/homepage">
+            <Route exact path="/homepage">
                 <Homepage />
             </Route>
 
             <Route exact path="/suggestions">
-                <Suggestion />
+                <SuggestionList />
             </Route>
 
-            <Route path="/suggestions/create">
+            <Route exact path="/suggestions/create">
                 <SuggestionForm />
             </Route>
         </>

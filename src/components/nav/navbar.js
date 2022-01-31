@@ -11,6 +11,9 @@ export const Navbar = () => {
             <ul className="navbar__item active">
                 <Link className="navbar__link" to="/suggestions/create">Podcast Suggestion Form</Link>
             </ul>
+            <ul className="navbar__item active">
+                <Link className="navbar__link" to="/homepage">Homepage</Link>
+            </ul>
         </ul>
     )
 }

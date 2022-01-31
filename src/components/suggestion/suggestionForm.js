@@ -27,9 +27,9 @@ export const SuggestionForm = () => {
             body: JSON.stringify(newSuggestion)
         }
 
-        return fetch("http://localhost:8088/suggestion", fetchOption)
+        return fetch("http://localhost:8088/suggestions", fetchOption)
             .then(() => {
-                history.push("/suggestion")
+                history.push("/suggestions")
 
             })
     }
