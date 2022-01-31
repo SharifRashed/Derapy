@@ -4,7 +4,7 @@ export const Homepage = () => {
 
     return (
 
-        <h2> Welcome to the offical website of Derapy! </h2>
+        <h2> Welcome to the Offical Website of Derapy! </h2>
 
 
     )
