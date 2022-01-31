@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
-// import "./Suggestion.css"
 
 
 
 export const SuggestionList = () => {
-    //whatever this export function returns will be the html that gets generated browser
     const history = useHistory()
     const [suggestions, modifySuggestions] = useState([])
-    const [users, modifyUsers] = useState([])
+
 
     useEffect(
         () => {
-            fetch("http://localhost:8088/suggestions")
+            fetch("http://localhost:8088/suggestions?_expand=user")
                 .then(response => response.json())
                 .then((data) => {
                     modifySuggestions(data)
@@ -22,18 +20,6 @@ export const SuggestionList = () => {
         []
     )
 
-    useEffect(
-        () => {
-            fetch("http://localhost:8088/users")
-                .then(response => response.json())
-                .then((data) => {
-                    modifyUsers(data)
-                }
-                )
-        },
-        []
-
-    )
     return (
         <>
             < div >
@@ -42,7 +28,7 @@ export const SuggestionList = () => {
             {
                 suggestions.map(
                     (suggestion) => {
-                        return <p key={`/suggestions/${suggestion.id}`}>{suggestion.description} submitted by {users.name}, {users.email} </p>
+                        return <p key={`/suggestions/${suggestion.id}`}>{suggestion.description} submitted by {suggestion.user.name}, {suggestion.user.email} </p>
 
                     }
                 )
