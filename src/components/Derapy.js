@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { ApplicationViews } from "./ApplicationView.js";
-// import { NavBar } from "./nav/NavBar";
+import { Navbar } from "./nav/navbar.js";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./Derapy.css";
@@ -13,6 +13,7 @@ export const Derapy = () => (
                 if (localStorage.getItem("derapy_customer")) {
                     return (
                         <>
+                            <Navbar />
                             <ApplicationViews />
                         </>
                     );
