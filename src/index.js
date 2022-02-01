@@ -9,8 +9,8 @@ import { Derapy } from './components/Derapy.js'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Derapy />
       <Homepage />
+      <Derapy />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

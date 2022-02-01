@@ -8,9 +8,15 @@ export const SuggestionList = () => {
 
 
     const deleteSuggestion = (id) => {
-        fetch(`http://localhost:8088/suggestions/${id}`, {
+        return fetch(`http://localhost:8088/suggestions/${id}`, {
             method: "DELETE"
-        })
+        }
+        )
+            .then(response => response.json())
+            .then((data => {
+                modifySuggestions(data)
+            }))
+
     }
 
     // useEffect(
@@ -48,7 +54,7 @@ export const SuggestionList = () => {
                     (suggestion) => {
                         return <p key={`/ suggestions / ${suggestion.id}`}>{suggestion.description} submitted by {suggestion.user.name}, {suggestion.user.email}
                             <button onClick={() => {
-                                deleteSuggestion(suggestions.id)
+                                deleteSuggestion(suggestion.id)
                             }}>Delete</button>
                         </p>
 
