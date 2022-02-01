@@ -8,28 +8,35 @@ export const SuggestionList = () => {
 
 
     const deleteSuggestion = (id) => {
-        return fetch(`http://localhost:8088/suggestions/${id}`, {
-            method: "DELETE"
+        fetch(`http://localhost:8088/suggestions/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("derapy_token")}`
+            }
         }
         )
+            .then(fetch(`http://localhost:8088/suggestions`))
             .then(response => response.json())
             .then((data => {
-                modifySuggestions(data)
+                return modifySuggestions(data)
             }))
 
     }
 
-    // useEffect(
-    //     () => {
-    //         const userId = parseInt(localStorage.getItem("derapy_user"));
-    //         let users
-    //         let suggestions
-    //         fetch("http://localhost:8088/suggestions?_expand=user")
-    //             .then(response => response.json())
-    //             .then((data) => {
-    //                 deleteSuggestion(data)
-    //             }
-    //             )
+
+    const userDeleteSuggestion = (suggestion) => {
+        if (suggestion.userId === parseInt(localStorage.getItem("derapy_customer"))) {
+
+            return <button onClick={() => {
+                deleteSuggestion(suggestion.id)
+            }}>Delete</button>
+
+        } else {
+            return ""
+        }
+
+    }
+
 
     useEffect(
         () => {
@@ -52,11 +59,13 @@ export const SuggestionList = () => {
             {
                 suggestions.map(
                     (suggestion) => {
-                        return <p key={`/ suggestions / ${suggestion.id}`}>{suggestion.description} submitted by {suggestion.user.name}, {suggestion.user.email}
-                            <button onClick={() => {
-                                deleteSuggestion(suggestion.id)
-                            }}>Delete</button>
-                        </p>
+                        return <div>
+                            <p key={`/ suggestions / ${suggestion.id}`}>{suggestion.description} submitted by {suggestion.user.name}, {suggestion.user.email}
+                            </p>
+                            <div className="user_delete_display">
+                                {userDeleteSuggestion(suggestion)}
+                            </div>
+                        </div>
 
                     }
                 )
