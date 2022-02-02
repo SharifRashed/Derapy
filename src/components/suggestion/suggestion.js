@@ -1,19 +1,49 @@
-import React from "react"
-import { useHistory } from "react-router-dom"
+import React, { useState } from "react"
+import { FaHeart } from "react-icons/fa"
+import { FaHeartBroken } from "react-icons/fa";
 
-export const Suggestion = () => {
-    const history = useHistory()
+
+export const Suggestion = ({ suggestion }) => {
+    const [liked, setLiked] = useState(false)
+
+
+    const toggle = (like) => {
+        let localLiked = like
+        localLiked = !localLiked
+        setLiked({ like: localLiked })
+    };
+
 
     return (
         <>
-            <h2> Suggestion Details </h2>
-            <section className="ticket">
-                <h3 className="ticket_description"></h3>
-                <div className="ticket_user"></div>
-            </section>
-            < div >
-                <button onClick={() => history.push("/suggestions/create")}>Create Suggestion</button>
-            </div >
+
+            <div>
+                <p key={`/ suggestions / ${suggestion.id}`}>{suggestion.description} submitted by {suggestion.user.name}, {suggestion.user.email}
+                </p>
+                <div className="user_delete_display">
+                    {/* {userDeleteSuggestion(suggestion)} */}
+                </div>
+            </div>
+            <div className="container">
+                <center>
+
+                    <p>Click on the Like Button</p>
+
+                    <div
+                        className="container"
+                        style={{ border: "1px solid black", width: "15%" }}
+                        onClick={() => toggle()}
+                    >
+                        {
+                            liked === false ? (
+                                <FaHeart />
+                            ) : (
+                                <FaHeartBroken />
+                            )
+                        }
+                    </div>
+                </center>
+            </div>
         </>
     )
 }
