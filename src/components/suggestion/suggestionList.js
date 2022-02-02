@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Suggestion } from "./suggestion.js"
 
 
 export const SuggestionList = () => {
     const history = useHistory()
     const [suggestions, modifySuggestions] = useState([])
+
 
 
     const deleteSuggestion = (id) => {
@@ -22,7 +25,6 @@ export const SuggestionList = () => {
             }))
 
     }
-
 
     const userDeleteSuggestion = (suggestion) => {
         if (suggestion.userId === parseInt(localStorage.getItem("derapy_customer"))) {
@@ -59,14 +61,9 @@ export const SuggestionList = () => {
             {
                 suggestions.map(
                     (suggestion) => {
-                        return <div>
-                            <p key={`/ suggestions / ${suggestion.id}`}>{suggestion.description} submitted by {suggestion.user.name}, {suggestion.user.email}
-                            </p>
-                            <div className="user_delete_display">
-                                {userDeleteSuggestion(suggestion)}
-                            </div>
-                        </div>
-
+                        return (
+                            <Suggestion suggestion={suggestion} />
+                        )
                     }
                 )
             }
