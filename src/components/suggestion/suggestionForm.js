@@ -36,8 +36,6 @@ export const SuggestionForm = () => {
     }
 
 
-
-
     return (
         <form className="suggestionForm">
             <h2 className="suggestionForm_title">New Suggestion</h2>

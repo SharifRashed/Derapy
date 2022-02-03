@@ -9,7 +9,6 @@ import { Derapy } from './components/Derapy.js'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Homepage />
       <Derapy />
     </BrowserRouter>
   </React.StrictMode>,
