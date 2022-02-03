@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { FaHeart } from "react-icons/fa"
 import { FaHeartBroken } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 export const Suggestion = ({ suggestion }) => {
     const [liked, setLiked] = useState(false)
-
+    const [likedState, setLikedState] = useState()
 
     const history = useHistory()
 
@@ -32,13 +32,24 @@ export const Suggestion = ({ suggestion }) => {
             })
     }
 
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/suggestionLikes?userId=${localStorage.getItem("derapy_token")}&suggestionId=${suggestion.id}`)
+                .then(response => response.json())
+                .then((data) => {
+                    setLikedState(data)
+                }
+                )
+        },
+        []
+    )
+
     const toggle = (like) => {
         let localLiked = like
         localLiked = !localLiked
         setLiked({ like: localLiked })
         submitLike()
-    };
-
+    }
 
     return (
         <>
@@ -53,13 +64,12 @@ export const Suggestion = ({ suggestion }) => {
                     {/* {userDeleteSuggestion(suggestion)} */}
                 </div>
             </div>
-            <div className="container">
+            <div className="like_button">
                 <center>
 
                     <p>Click on the Like Button</p>
 
-                    <div
-                        className="container"
+                    <div className="heart_like"
                         style={{ border: "1px solid black", width: "15%" }}
                         onClick={() => toggle()}
                     >
@@ -68,6 +78,7 @@ export const Suggestion = ({ suggestion }) => {
                                 <FaHeartBroken />
                             ) : (
                                 <FaHeart />
+
                             )
                         }
                     </div>
