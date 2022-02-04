@@ -58,11 +58,13 @@ export const SuggestionList = () => {
             < div >
                 <button onClick={() => history.push("/suggestions/create")}>Create Suggestion</button>
             </div >
+
             {
                 suggestions.map(
                     (suggestion) => {
                         return (
-                            <Suggestion suggestion={suggestion} />
+                            <Suggestion suggestion={suggestion}
+                                userDeleteSuggestion={userDeleteSuggestion} />
                         )
                     }
                 )
@@ -70,3 +72,4 @@ export const SuggestionList = () => {
         </>
     )
 }
+
