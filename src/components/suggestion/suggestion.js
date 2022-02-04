@@ -4,7 +4,7 @@ import { FaHeartBroken } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 
 
-export const Suggestion = ({ suggestion, userDeleteSuggestion }) => {
+export const Suggestion = ({ suggestion, deleteSuggestion }) => {
     const [liked, setLiked] = useState(false)
 
     const history = useHistory()
@@ -62,7 +62,15 @@ export const Suggestion = ({ suggestion, userDeleteSuggestion }) => {
                     submitted by {suggestion.user.name} , {suggestion.user.email}
                 </p>
                 <div className="user_delete_display">
-                    {userDeleteSuggestion(suggestion)}
+                    {suggestion.userId === parseInt(localStorage.getItem("derapy_customer")) ?
+
+                        <button onClick={() => {
+                            deleteSuggestion(suggestion.id)
+                        }}>Delete</button>
+
+
+                        : ""
+                    }
                 </div>
             </div>
             <div className="like_button">
