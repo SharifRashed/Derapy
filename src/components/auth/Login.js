@@ -20,7 +20,7 @@ export const Login = () => {
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("derapy_customer", exists.id)
-                    history.push("/")
+                    history.push("/homepage")
                 } else {
                     existDialog.current.showModal()
                 }

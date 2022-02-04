@@ -19,7 +19,7 @@ export const Register = (props) => {
         existingUserCheck()
             .then((userExists) => {
                 if (!userExists) {
-                    fetch("http://localhost:8088/user", {
+                    fetch("http://localhost:8088/users", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
@@ -29,8 +29,8 @@ export const Register = (props) => {
                         .then(res => res.json())
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
-                                localStorage.setItem("user_customer", createdUser.id)
-                                history.push("/")
+                                localStorage.setItem("derapy_customer", createdUser.id)
+                                history.push("/homepage")
                             }
                         })
                 }
