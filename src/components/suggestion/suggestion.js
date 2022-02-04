@@ -4,9 +4,8 @@ import { FaHeartBroken } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 
 
-export const Suggestion = ({ suggestion }) => {
+export const Suggestion = ({ suggestion, userDeleteSuggestion }) => {
     const [liked, setLiked] = useState(false)
-    const [likedState, setLikedState] = useState()
 
     const history = useHistory()
 
@@ -22,6 +21,7 @@ export const Suggestion = ({ suggestion }) => {
             headers: {
                 "Content-Type": "application/json"
             },
+            //pass in new like function as the arguement
             body: JSON.stringify(newLike)
         }
 
@@ -37,17 +37,17 @@ export const Suggestion = ({ suggestion }) => {
             fetch(`http://localhost:8088/suggestionLikes?userId=${localStorage.getItem("derapy_token")}&suggestionId=${suggestion.id}`)
                 .then(response => response.json())
                 .then((data) => {
-                    setLikedState(data)
+                    setLiked(data)
                 }
                 )
         },
         []
     )
 
-    const toggle = (like) => {
-        let localLiked = like
+    const toggle = () => {
+        let localLiked = liked
         localLiked = !localLiked
-        setLiked({ like: localLiked })
+        setLiked(localLiked)
         submitLike()
     }
 
@@ -61,7 +61,7 @@ export const Suggestion = ({ suggestion }) => {
                     submitted by {suggestion.user.name} , {suggestion.user.email}
                 </p>
                 <div className="user_delete_display">
-                    {/* {userDeleteSuggestion(suggestion)} */}
+                    {userDeleteSuggestion(suggestion)}
                 </div>
             </div>
             <div className="like_button">
@@ -75,9 +75,9 @@ export const Suggestion = ({ suggestion }) => {
                     >
                         {
                             liked === false ? (
-                                <FaHeartBroken />
-                            ) : (
                                 <FaHeart />
+                            ) : (
+                                <FaHeartBroken />
 
                             )
                         }
