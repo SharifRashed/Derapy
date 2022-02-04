@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Suggestion } from "./suggestion.js"
 
 

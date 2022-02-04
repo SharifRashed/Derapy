@@ -32,6 +32,7 @@ export const Suggestion = ({ suggestion, userDeleteSuggestion }) => {
             })
     }
 
+    //A use Effect hook that fetches the suggestion likes data and the current user 
     useEffect(
         () => {
             fetch(`http://localhost:8088/suggestionLikes?userId=${localStorage.getItem("derapy_token")}&suggestionId=${suggestion.id}`)
@@ -44,6 +45,7 @@ export const Suggestion = ({ suggestion, userDeleteSuggestion }) => {
         []
     )
 
+    //toggle function will allow a user to toggle the heart icon
     const toggle = () => {
         let localLiked = liked
         localLiked = !localLiked
@@ -53,7 +55,6 @@ export const Suggestion = ({ suggestion, userDeleteSuggestion }) => {
 
     return (
         <>
-
             <div>
                 <p key={`/ suggestions / ${suggestion.id}`}>{suggestion.description}
                 </p>
