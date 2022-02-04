@@ -17,28 +17,15 @@ export const SuggestionList = () => {
             }
         }
         )
-            .then(fetch(`http://localhost:8088/suggestions`))
+            .then(() => fetch(`http://localhost:8088/suggestions?_expand=user`))
             .then(response => response.json())
-            .then((data => {
+            .then((data) => {
                 return modifySuggestions(data)
-            }))
+            })
 
     }
 
-    const userDeleteSuggestion = (suggestion) => {
-        if (suggestion.userId === parseInt(localStorage.getItem("derapy_customer"))) {
-
-            return <button onClick={() => {
-                deleteSuggestion(suggestion.id)
-            }}>Delete</button>
-
-        } else {
-            return ""
-        }
-
-    }
-
-
+    //grabs all the data of suggestions and users
     useEffect(
         () => {
             fetch("http://localhost:8088/suggestions?_expand=user")
@@ -62,8 +49,8 @@ export const SuggestionList = () => {
                 suggestions.map(
                     (suggestion) => {
                         return (
-                            <Suggestion suggestion={suggestion}
-                                userDeleteSuggestion={userDeleteSuggestion} />
+                            <Suggestion suggestion={suggestion} key={suggestion.id}
+                                deleteSuggestion={deleteSuggestion} />
                         )
                     }
                 )
