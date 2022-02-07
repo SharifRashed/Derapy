@@ -13,6 +13,7 @@ export const SuggestionForm = () => {
     const submitSuggestion = (event) => {
         event.preventDefault()
 
+        //function that holds an object of properties for a new suggestion
         const newSuggestion = {
             title: suggestion.title,
             userId: parseInt(localStorage.getItem("derapy_customer")),

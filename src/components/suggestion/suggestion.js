@@ -45,7 +45,7 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
         []
     )
 
-    //toggle function will allow a user to toggle the heart icon
+    //toggle function will allow a user to toggle the heart icon depending on the ternary conditional in the return statement
     const toggle = () => {
         let localLiked = liked
         localLiked = !localLiked
