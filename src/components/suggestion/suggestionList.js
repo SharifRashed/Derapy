@@ -10,6 +10,7 @@ export const SuggestionList = () => {
 
 
     const deleteSuggestion = (id) => {
+        //fetches the id for a suggestion post
         fetch(`http://localhost:8088/suggestions/${id}`, {
             method: "DELETE",
             headers: {
@@ -17,9 +18,11 @@ export const SuggestionList = () => {
             }
         }
         )
+            //fetches the users for each suggestion in the database
             .then(() => fetch(`http://localhost:8088/suggestions?_expand=user`))
             .then(response => response.json())
             .then((data) => {
+                //use state setter function
                 return modifySuggestions(data)
             })
 
