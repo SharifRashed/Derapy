@@ -1,6 +1,8 @@
 # Welcome to Derapy 
 
-## Primary Features- The primary features of the app allows a user to create an account and log-in to the website where they can be directed to create a podcast suggestion to help Derapy become a better podcast. 
+## Primary Features- 
+
+The primary features of the app allows a user to create an account and log-in to the website where they can be directed to create a podcast suggestion to help Derapy become a better podcast. 
 
 ### Target Audience- The intended audience are Derapy listeners but all podcast listeners were kept in mind while designing the website.
 
