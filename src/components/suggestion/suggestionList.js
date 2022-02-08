@@ -5,6 +5,7 @@ import { Suggestion } from "./suggestion.js"
 
 export const SuggestionList = () => {
     const history = useHistory()
+    //use State has a variable that holds state and a setter function
     const [suggestions, modifySuggestions] = useState([])
 
 
@@ -20,6 +21,7 @@ export const SuggestionList = () => {
         )
             //fetches the users for each suggestion in the database
             .then(() => fetch(`http://localhost:8088/suggestions?_expand=user`))
+            // .then is the promise a fetch call returns
             .then(response => response.json())
             .then((data) => {
                 //use state setter function
