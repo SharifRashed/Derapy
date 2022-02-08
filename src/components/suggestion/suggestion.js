@@ -5,8 +5,11 @@ import { useHistory } from "react-router-dom";
 
 
 export const Suggestion = ({ suggestion, deleteSuggestion }) => {
+    // use state has a variable and a setter function that holds state
     const [liked, setLiked] = useState(false)
+    const [suggestionLike, setSuggestionLike] = useState({})
 
+    //allows us to manipulate the url
     const history = useHistory()
 
     const submitLike = () => {
@@ -16,6 +19,7 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
             suggestionId: suggestion.id,
             userId: parseInt(localStorage.getItem("derapy_customer"))
         }
+        //fetch option posts the returning data of the new like function then into a new object to "/suggestions" by the history.push method
         const fetchOption = {
             method: "POST",
             headers: {
@@ -25,20 +29,28 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
             body: JSON.stringify(newLike)
         }
 
-        //fetch option posts the returning data of the new like function then into a new object to "/suggestions" by the history.push method
         return fetch("http://localhost:8088/suggestionLikes", fetchOption)
-            .then(() => {
+            .then(response => response.json())
+            .then((data) => {
+                setSuggestionLike(data)
                 history.push("/suggestions")
             })
     }
 
+    //Use Effect asks as an "event listner" for state
     //A use Effect hook that fetches the suggestion likes data and the current user 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/suggestionLikes?userId=${localStorage.getItem("derapy_token")}&suggestionId=${suggestion.id}`)
+            // returns an array
+            fetch(`http://localhost:8088/suggestionLikes?userId=${localStorage.getItem("derapy_customer")}&suggestionId=${suggestion.id}`)
                 .then(response => response.json())
                 .then((data) => {
-                    setLiked(data)
+                    console.log(data, `likes for ${suggestion.id}`)
+                    //conditonal that specifies if the index of the array is more than 0( 1 or more objects in the array)
+                    if (data.length > 0) {
+                        setLiked(true);
+                        setSuggestionLike(data[0])
+                    }
                 }
                 )
         },
@@ -49,8 +61,15 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
     const toggle = () => {
         let localLiked = liked
         localLiked = !localLiked
+        if (liked) {
+            fetch(`http://localhost:8088/suggestionLikes/${suggestionLike.id}`, {
+                method: "DELETE"
+            }).then(() => setSuggestionLike({}))
+        }
+        else {
+            submitLike()
+        }
         setLiked(localLiked)
-        submitLike()
     }
 
     return (
