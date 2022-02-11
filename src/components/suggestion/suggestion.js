@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { FaHeart } from "react-icons/fa"
 import { FaHeartBroken } from "react-icons/fa";
-import { useHistory } from "react-router-dom";
 
 
 export const Suggestion = ({ suggestion, deleteSuggestion }) => {
     // use state has a variable and a setter function that holds state
     const [liked, setLiked] = useState(false)
     const [suggestionLike, setSuggestionLike] = useState({})
-
-    //allows us to manipulate the url
-    const history = useHistory()
 
     const submitLike = () => {
 
@@ -33,7 +29,6 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
             .then(response => response.json())
             .then((data) => {
                 setSuggestionLike(data)
-                history.push("/suggestions")
             })
     }
 
@@ -41,12 +36,15 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
     //A use Effect hook that fetches the suggestion likes data and the current user 
     useEffect(
         () => {
+            //determines whether or not the logged in user has liked the specific suggestion or not
+            //fetch call matches the current user logged in, to the user id
             // returns an array
             fetch(`http://localhost:8088/suggestionLikes?userId=${localStorage.getItem("derapy_customer")}&suggestionId=${suggestion.id}`)
                 .then(response => response.json())
                 .then((data) => {
                     console.log(data, `likes for ${suggestion.id}`)
                     //conditonal that specifies if the index of the array is more than 0( 1 or more objects in the array)
+                    //conditonal runs as a check for a suggestion
                     if (data.length > 0) {
                         setLiked(true);
                         setSuggestionLike(data[0])
@@ -54,6 +52,7 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
                 }
                 )
         },
+        //if we dont have a dependacy array, the use effect still triggers anytime any state change occurs
         []
     )
 
@@ -69,6 +68,7 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
         else {
             submitLike()
         }
+        //setting liked state as the opposite of liked
         setLiked(localLiked)
     }
 

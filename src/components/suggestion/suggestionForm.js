@@ -31,6 +31,7 @@ export const SuggestionForm = () => {
 
         return fetch("http://localhost:8088/suggestions", fetchOption)
             .then(() => {
+                //pushes to the url bar ( in this case, suggestion page)
                 history.push("/suggestions")
 
             })
