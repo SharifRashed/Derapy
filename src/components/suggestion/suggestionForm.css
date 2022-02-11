@@ -1,0 +1,10 @@
+.btn-primary {
+  font-family: "Times New Roman";
+  background-color: rgb(68, 212, 169);
+  width: 90px;
+  border: 2px solid rgb(48, 190, 147);
+  border-style: ridge;
+  border-radius: 5px;
+  padding: 0.5px;
+  margin: 10px;
+}

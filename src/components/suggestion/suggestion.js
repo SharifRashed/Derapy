@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { FaHeart } from "react-icons/fa"
 import { FaHeartBroken } from "react-icons/fa";
+import "./suggestion.css"
 
 
 export const Suggestion = ({ suggestion, deleteSuggestion }) => {
@@ -75,6 +76,8 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
     return (
         <>
             <div>
+                <p key={`/ suggestions / ${suggestion.id}`}>{suggestion.title}
+                </p>
                 <p key={`/ suggestions / ${suggestion.id}`}>{suggestion.description}
                 </p>
                 <p>
@@ -83,7 +86,7 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
                 <div className="user_delete_display">
                     {suggestion.userId === parseInt(localStorage.getItem("derapy_customer")) ?
 
-                        <button onClick={() => {
+                        <button className="btn-primary" onClick={() => {
                             deleteSuggestion(suggestion.id)
                         }}>Delete</button>
 

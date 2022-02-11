@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Suggestion } from "./suggestion.js"
+import "./suggestionList.css"
 
 
 export const SuggestionList = () => {
@@ -47,7 +48,7 @@ export const SuggestionList = () => {
         <>
 
             < div >
-                <button onClick={() => history.push("/suggestions/create")}>Create Suggestion</button>
+                <button className="btn-primary" onClick={() => history.push("/suggestions/create")}>Create Suggestion</button>
             </div >
 
             {
