@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom";
+import "./suggestionForm.css";
 
 
 export const SuggestionForm = () => {
@@ -31,6 +32,7 @@ export const SuggestionForm = () => {
 
         return fetch("http://localhost:8088/suggestions", fetchOption)
             .then(() => {
+                //pushes to the url bar ( in this case, suggestion page)
                 history.push("/suggestions")
 
             })
@@ -74,8 +76,8 @@ export const SuggestionForm = () => {
                         } />
                 </div>
             </fieldset>
-            <button className="btn btn-primary" onClick={submitSuggestion}>
-                Submit Suggestion
+            <button className="btn-primary" onClick={submitSuggestion}>
+                Submit
             </button>
         </form>
     )

@@ -9,7 +9,7 @@ import { SuggestionList } from "./suggestion/suggestionList.js"
 export const ApplicationViews = () => {
     return (
         <>
-            <Route exact path="/homepage">
+            <Route exact path={["/homepage", "/"]}>
                 <Homepage />
             </Route>
 
@@ -24,6 +24,7 @@ export const ApplicationViews = () => {
             <Route exact path="/meetDeryk">
                 <Deryk />
             </Route>
+
         </>
     )
 }

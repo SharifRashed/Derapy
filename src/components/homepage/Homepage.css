@@ -8,6 +8,7 @@ p {
 }
 body {
   margin: 1.5em;
+  display: flex;
   flex-wrap: wrap;
   background-color: lightblue;
 }
