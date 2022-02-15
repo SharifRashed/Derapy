@@ -1,8 +1,6 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom";
 import "./suggestionForm.css";
-
-
 export const SuggestionForm = () => {
     const [suggestion, updateSuggestion] = useState({
         title: "",
