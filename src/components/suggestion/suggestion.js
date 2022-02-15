@@ -16,7 +16,7 @@ export const Suggestion = ({ suggestion, deleteSuggestion }) => {
             suggestionId: suggestion.id,
             userId: parseInt(localStorage.getItem("derapy_customer"))
         }
-        //fetch option posts the returning data of the new like function then into a new object to "/suggestions" by the history.push method
+        //fetch option posts the returning data of the new like function then into a new object 
         const fetchOption = {
             method: "POST",
             headers: {
